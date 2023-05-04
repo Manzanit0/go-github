@@ -369,3 +369,22 @@ func (s *ActionsService) PendingDeployments(ctx context.Context, owner, repo str
 
 	return deployments, resp, nil
 }
+
+// ReviewDeploymentProtectionRule approve or reject pending deployments that are waiting on approval by a GitHub App.
+//
+// GitHub API docs: https://docs.github.com/en/rest/actions/workflow-runs#review-custom-deployment-protection-rules-for-a-workflow-run
+func (s *ActionsService) ReviewDeploymentProtectionRule(ctx context.Context, owner, repo string, runID int64) (*Response, error) {
+	u := fmt.Sprintf("repos/%v/%v/actions/runs/%v/deployment_protection_rule", owner, repo, runID)
+
+	req, err := s.client.NewRequest("POST", u, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	resp, err := s.client.Do(ctx, req, nil)
+	if err != nil {
+		return resp, err
+	}
+
+	return resp, nil
+}
