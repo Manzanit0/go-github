@@ -15,8 +15,8 @@ import (
 	"os"
 	"time"
 
+	"github.com/Manzanit0/go-github/v52/github"
 	"github.com/bradleyfalzon/ghinstallation/v2"
-	"github.com/google/go-github/v52/github"
 	"golang.org/x/oauth2"
 )
 

@@ -16,8 +16,8 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/Manzanit0/go-github/v52/github"
 	"github.com/PuerkitoBio/goquery"
-	"github.com/google/go-github/v52/github"
 )
 
 // AppRestrictionsEnabled returns whether the specified organization has

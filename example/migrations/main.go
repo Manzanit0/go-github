@@ -12,7 +12,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/google/go-github/v52/github"
+	"github.com/Manzanit0/go-github/v52/github"
 )
 
 func fetchAllUserMigrations() ([]*github.UserMigration, error) {

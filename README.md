@@ -1,7 +1,7 @@
-# go-github #
+# go-github
 
 [![go-github release (latest SemVer)](https://img.shields.io/github/v/release/google/go-github?sort=semver)](https://github.com/google/go-github/releases)
-[![GoDoc](https://img.shields.io/static/v1?label=godoc&message=reference&color=blue)](https://pkg.go.dev/github.com/google/go-github/v52/github)
+[![GoDoc](https://img.shields.io/static/v1?label=godoc&message=reference&color=blue)](https://pkg.go.dev/github.com/Manzanit0/go-github/v52/github)
 [![Test Status](https://github.com/google/go-github/workflows/tests/badge.svg)](https://github.com/google/go-github/actions?query=workflow%3Atests)
 [![Test Coverage](https://codecov.io/gh/google/go-github/branch/master/graph/badge.svg)](https://codecov.io/gh/google/go-github)
 [![Discuss at go-github@googlegroups.com](https://img.shields.io/badge/discuss-go--github%40googlegroups.com-blue.svg)](https://groups.google.com/group/go-github)
@@ -9,8 +9,8 @@
 
 go-github is a Go client library for accessing the [GitHub API v3][].
 
-Currently, **go-github requires Go version 1.13 or greater**.  go-github tracks
-[Go's version support policy][support-policy].  We do our best not to break
+Currently, **go-github requires Go version 1.13 or greater**. go-github tracks
+[Go's version support policy][support-policy]. We do our best not to break
 older versions of Go if we don't have to, but due to tooling constraints, we
 don't always test older versions.
 
@@ -19,12 +19,12 @@ don't always test older versions.
 If you're interested in using the [GraphQL API v4][], the recommended library is
 [shurcooL/githubv4][].
 
-## Installation ##
+## Installation
 
 go-github is compatible with modern Go releases in module mode, with Go installed:
 
 ```bash
-go get github.com/google/go-github/v52
+go get github.com/Manzanit0/go-github/v52
 ```
 
 will resolve and add the package to the current development module, along with its dependencies.
@@ -32,7 +32,7 @@ will resolve and add the package to the current development module, along with i
 Alternatively the same can be achieved if you use import in a package:
 
 ```go
-import "github.com/google/go-github/v52/github"
+import "github.com/Manzanit0/go-github/v52/github"
 ```
 
 and run `go get` without parameters.
@@ -40,13 +40,13 @@ and run `go get` without parameters.
 Finally, to use the top-of-trunk version of this repo, use the following command:
 
 ```bash
-go get github.com/google/go-github/v52@master
+go get github.com/Manzanit0/go-github/v52@master
 ```
 
-## Usage ##
+## Usage
 
 ```go
-import "github.com/google/go-github/v52/github"	// with go modules enabled (GO111MODULE=on or outside GOPATH)
+import "github.com/Manzanit0/go-github/v52/github"	// with go modules enabled (GO111MODULE=on or outside GOPATH)
 import "github.com/google/go-github/github" // with go modules disabled
 ```
 
@@ -82,7 +82,7 @@ can be used as a starting point.
 For more sample code snippets, head over to the
 [example](https://github.com/google/go-github/tree/master/example) directory.
 
-### Authentication ###
+### Authentication
 
 The go-github library does not directly handle authentication. Instead, when
 creating a new client, pass an `http.Client` that can handle authentication for
@@ -117,7 +117,7 @@ See the [oauth2 docs][] for complete instructions on using that library.
 For API methods that require HTTP Basic Authentication, use the
 [`BasicAuthTransport`](https://godoc.org/github.com/google/go-github/github#BasicAuthTransport).
 
-#### As a GitHub App ####
+#### As a GitHub App
 
 GitHub Apps authentication can be provided by the [ghinstallation](https://github.com/bradleyfalzon/ghinstallation)
 package.
@@ -129,13 +129,12 @@ package.
 [`GET /app/hook/deliveries`]: https://docs.github.com/en/rest/apps/webhooks#list-deliveries-for-an-app-webhook
 [JWT]: https://docs.github.com/en/developers/apps/building-github-apps/authenticating-with-github-apps#authenticating-as-a-github-app
 
-
 ```go
 import (
 	"net/http"
 
 	"github.com/bradleyfalzon/ghinstallation/v2"
-	"github.com/google/go-github/v52/github"
+	"github.com/Manzanit0/go-github/v52/github"
 )
 
 func main() {
@@ -156,10 +155,10 @@ func main() {
 }
 ```
 
-*Note*: In order to interact with certain APIs, for example writing a file to a repo, one must generate an installation token
+_Note_: In order to interact with certain APIs, for example writing a file to a repo, one must generate an installation token
 using the installation ID of the GitHub app and authenticate with the OAuth method mentioned above. See the examples.
 
-### Rate Limiting ###
+### Rate Limiting
 
 GitHub imposes a rate limit on all API clients. Unauthenticated clients are
 limited to 60 requests per hour, while authenticated clients can make up to
@@ -204,7 +203,7 @@ secondary rate limit sleep-and-retry for you.
 Learn more about GitHub secondary rate limiting at
 https://docs.github.com/en/rest/overview/resources-in-the-rest-api#secondary-rate-limits .
 
-### Accepted Status ###
+### Accepted Status
 
 Some endpoints may return a 202 Accepted status code, meaning that the
 information required is not yet ready and was scheduled to be gathered on
@@ -221,7 +220,7 @@ if _, ok := err.(*github.AcceptedError); ok {
 }
 ```
 
-### Conditional Requests ###
+### Conditional Requests
 
 The GitHub API has good support for conditional requests which will help
 prevent you from burning through your rate limit, as well as help speed up your
@@ -247,7 +246,7 @@ import "github.com/gregjones/httpcache"
 Learn more about GitHub conditional requests at
 https://docs.github.com/en/rest/overview/resources-in-the-rest-api#conditional-requests.
 
-### Creating and Updating Resources ###
+### Creating and Updating Resources
 
 All structs for GitHub resources use pointer values for all non-repeated fields.
 This allows distinguishing between unset fields and those set to a zero-value.
@@ -265,7 +264,7 @@ client.Repositories.Create(ctx, "", repo)
 
 Users who have worked with protocol buffers should find this pattern familiar.
 
-### Pagination ###
+### Pagination
 
 All requests for resource collections (repos, pull requests, issues, etc.)
 support pagination. Pagination options are described in the
@@ -295,7 +294,7 @@ for {
 }
 ```
 
-### Webhooks ###
+### Webhooks
 
 `go-github` provides structs for almost all [GitHub webhook events][] as well as functions to validate them and unmarshal JSON payloads from `http.Request` structs.
 
@@ -323,7 +322,7 @@ For complete usage of go-github, see the full [package docs][].
 [oauth2]: https://github.com/golang/oauth2
 [oauth2 docs]: https://godoc.org/golang.org/x/oauth2
 [personal API token]: https://github.com/blog/1509-personal-api-tokens
-[package docs]: https://pkg.go.dev/github.com/google/go-github/v52/github
+[package docs]: https://pkg.go.dev/github.com/Manzanit0/go-github/v52/github
 [GraphQL API v4]: https://developer.github.com/v4/
 [shurcooL/githubv4]: https://github.com/shurcooL/githubv4
 [GitHub webhook events]: https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads
@@ -333,16 +332,17 @@ For complete usage of go-github, see the full [package docs][].
 
 The repo [migueleliasweb/go-github-mock](https://github.com/migueleliasweb/go-github-mock) provides a way to mock responses. Check the repo for more details.
 
-### Integration Tests ###
+### Integration Tests
 
 You can run integration tests from the `test` directory. See the integration tests [README](test/README.md).
 
-## Contributing ##
+## Contributing
+
 I would like to cover the entire GitHub API and contributions are of course always welcome. The
 calling pattern is pretty well established, so adding new methods is relatively
 straightforward. See [`CONTRIBUTING.md`](CONTRIBUTING.md) for details.
 
-## Versioning ##
+## Versioning
 
 In general, go-github follows [semver](https://semver.org/) as closely as we
 can for tagging releases of the package. For self-contained libraries, the
@@ -352,20 +352,20 @@ itself changes behavior, and because we are typically pretty aggressive about
 implementing preview features of the GitHub API, we've adopted the following
 versioning policy:
 
-* We increment the **major version** with any incompatible change to
-	non-preview functionality, including changes to the exported Go API surface
-	or behavior of the API.
-* We increment the **minor version** with any backwards-compatible changes to
-	functionality, as well as any changes to preview functionality in the GitHub
-	API. GitHub makes no guarantee about the stability of preview functionality,
-	so neither do we consider it a stable part of the go-github API.
-* We increment the **patch version** with any backwards-compatible bug fixes.
+- We increment the **major version** with any incompatible change to
+  non-preview functionality, including changes to the exported Go API surface
+  or behavior of the API.
+- We increment the **minor version** with any backwards-compatible changes to
+  functionality, as well as any changes to preview functionality in the GitHub
+  API. GitHub makes no guarantee about the stability of preview functionality,
+  so neither do we consider it a stable part of the go-github API.
+- We increment the **patch version** with any backwards-compatible bug fixes.
 
 Preview functionality may take the form of entire methods or simply additional
 data returned from an otherwise non-preview method. Refer to the GitHub API
 documentation for details on preview functionality.
 
-### Calendar Versioning ###
+### Calendar Versioning
 
 As of 2022-11-28, GitHub [has announced](https://github.blog/2022-11-28-to-infinity-and-beyond-enabling-the-future-of-githubs-rest-api-with-api-versioning/)
 that they are starting to version their v3 API based on "calendar-versioning".
@@ -379,16 +379,16 @@ have breaking changes. Other methods will accept the new version with
 their existing functionality. So when a new date-based version of the
 GitHub API is released, we (the repo maintainers) plan to:
 
-* update each method that had breaking changes, overriding their
+- update each method that had breaking changes, overriding their
   per-method API version header. This may happen in one or multiple
   commits and PRs, and is all done in the main branch.
 
-* once all of the methods with breaking changes have been updated,
+- once all of the methods with breaking changes have been updated,
   have a final commit that bumps the default API version, and remove
   all of the per-method overrides. That would now get a major version
   bump when the next go-github release is made.
 
-### Version Compatibility Table ###
+### Version Compatibility Table
 
 The following table identifies which version of the GitHub API is
 supported by this (and past) versions of this repo (go-github).
@@ -405,7 +405,7 @@ Versions prior to 48.2.0 are not listed.
 | 49.0.0            | 2022-11-28            |
 | 48.2.0            | 2022-11-28            |
 
-## License ##
+## License
 
 This library is distributed under the BSD-style license found in the [LICENSE](./LICENSE)
 file.

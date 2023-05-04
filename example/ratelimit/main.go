@@ -12,8 +12,8 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/Manzanit0/go-github/v52/github"
 	"github.com/gofri/go-github-ratelimit/github_ratelimit"
-	"github.com/google/go-github/v52/github"
 )
 
 func main() {

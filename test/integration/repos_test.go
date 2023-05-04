@@ -14,8 +14,8 @@ import (
 	"net/http"
 	"testing"
 
+	"github.com/Manzanit0/go-github/v52/github"
 	"github.com/google/go-cmp/cmp"
-	"github.com/google/go-github/v52/github"
 )
 
 func TestRepositories_CRUD(t *testing.T) {
