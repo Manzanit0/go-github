@@ -102,6 +102,14 @@ type PendingDeploymentsRequest struct {
 	Comment string `json:"comment"`
 }
 
+// ReviewDeploymentProtectionRuleRequest specifies body parameters to ReviewDeploymentProtectionRule.
+type ReviewDeploymentProtectionRuleRequest struct {
+	EnvironmentName string `json:"environment_name"`
+	// State can be one of: "approved", "rejected".
+	State   string `json:"state"`
+	Comment string `json:"comment"`
+}
+
 func (s *ActionsService) listWorkflowRuns(ctx context.Context, endpoint string, opts *ListWorkflowRunsOptions) (*WorkflowRuns, *Response, error) {
 	u, err := addOptions(endpoint, opts)
 	if err != nil {
@@ -373,10 +381,10 @@ func (s *ActionsService) PendingDeployments(ctx context.Context, owner, repo str
 // ReviewDeploymentProtectionRule approve or reject pending deployments that are waiting on approval by a GitHub App.
 //
 // GitHub API docs: https://docs.github.com/en/rest/actions/workflow-runs#review-custom-deployment-protection-rules-for-a-workflow-run
-func (s *ActionsService) ReviewDeploymentProtectionRule(ctx context.Context, owner, repo string, runID int64) (*Response, error) {
+func (s *ActionsService) ReviewDeploymentProtectionRule(ctx context.Context, owner, repo string, runID int64, request *ReviewDeploymentProtectionRuleRequest) (*Response, error) {
 	u := fmt.Sprintf("repos/%v/%v/actions/runs/%v/deployment_protection_rule", owner, repo, runID)
 
-	req, err := s.client.NewRequest("POST", u, nil)
+	req, err := s.client.NewRequest("POST", u, request)
 	if err != nil {
 		return nil, err
 	}
